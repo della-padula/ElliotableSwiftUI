@@ -11,6 +11,7 @@
 		B05AEE57251073CF00D21905 /* ElliottEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE56251073CF00D21905 /* ElliottEvent.swift */; };
 		B05AEE59251073EA00D21905 /* ElliottDayOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE58251073EA00D21905 /* ElliottDayOption.swift */; };
 		B05AEE7625108BFC00D21905 /* SwiftUI+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */; };
+		B05AEE7825108C6300D21905 /* Elliotable+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE7725108C6300D21905 /* Elliotable+Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		B05AEE56251073CF00D21905 /* ElliottEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElliottEvent.swift; sourceTree = "<group>"; };
 		B05AEE58251073EA00D21905 /* ElliottDayOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElliottDayOption.swift; sourceTree = "<group>"; };
 		B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Border.swift"; sourceTree = "<group>"; };
+		B05AEE7725108C6300D21905 /* Elliotable+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Elliotable+Constant.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				B05AEE56251073CF00D21905 /* ElliottEvent.swift */,
 				B05AEE58251073EA00D21905 /* ElliottDayOption.swift */,
 				B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */,
+				B05AEE7725108C6300D21905 /* Elliotable+Constant.swift */,
 			);
 			path = ElliotableSwiftUI;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				B05AEE57251073CF00D21905 /* ElliottEvent.swift in Sources */,
 				B05AEE59251073EA00D21905 /* ElliottDayOption.swift in Sources */,
+				B05AEE7825108C6300D21905 /* Elliotable+Constant.swift in Sources */,
 				B05AEE7625108BFC00D21905 /* SwiftUI+Border.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

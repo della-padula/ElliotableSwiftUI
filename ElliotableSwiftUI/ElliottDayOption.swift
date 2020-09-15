@@ -14,6 +14,11 @@ public enum ElliotDay: Int {
     case thursday  = 4
     case friday    = 5
     case saturday  = 6
+    case sunday    = 7
+    
+    func getDaySymbol() -> String? {
+        return ElliotableConstant.shared.getDaySymbol(index: self.rawValue)
+    }
 }
 
 public enum ElliotDayType: Int {
