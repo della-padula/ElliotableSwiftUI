@@ -68,19 +68,29 @@ public struct ElliotableView: View {
                                         if index == course.courseDay.rawValue - 1 {
                                             let courseStartHour = Int(course.startTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMinTime()
                                             let courseStartMinute = Int(course.startTime.split(separator: ":")[1]) ?? 0
-                                            let hourDiff = CGFloat(courseStartHour - ElliotableConstant.shared.getMinTime())
-                                            let minuteDiff = (CGFloat(courseStartMinute) / CGFloat(60)) * hourHeight
+                                            
+                                            let courseEndHour = Int(course.endTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMaxTime()
+                                            let courseEndMinute = Int(course.endTime.split(separator: ":")[1]) ?? 0
+                                            
+                                            let startHourDiff = CGFloat(courseStartHour - ElliotableConstant.shared.getMinTime())
+                                            let startMinuteDiff = (CGFloat(courseStartMinute) / CGFloat(60)) * hourHeight
+                                            
+                                            let courseHourDiff = CGFloat(courseEndHour - courseStartHour)
+                                            let endMinuteDiff = (CGFloat(courseEndMinute) / CGFloat(60)) * hourHeight
                                             
                                             VStack {
                                                 
                                             }
-                                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 27, maxHeight: 27 + (hourHeight * hourDiff) + minuteDiff)
+                                            .frame(minWidth: 0,
+                                                   maxWidth: .infinity,
+                                                   minHeight: 27,
+                                                   maxHeight: 27 + (hourHeight * startHourDiff) + startMinuteDiff)
                                             
                                             CourseView()
                                                 .frame(minWidth: 0,
                                                        maxWidth: .infinity,
                                                        minHeight: hourHeight,
-                                                       maxHeight: hourHeight)
+                                                       maxHeight: (hourHeight * courseHourDiff) + endMinuteDiff)
                                                 .background(colors[index])
                                         }
                                     }
