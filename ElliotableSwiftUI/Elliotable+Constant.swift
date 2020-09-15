@@ -27,14 +27,37 @@ public class ElliotableConstant {
     }
     
     // MARK: View Layout Section
-    private var headerHeight: CGFloat = 25
-    private var itemHeight: CGFloat = 50
+    private var headerHeight: CGFloat = 28
+    private var itemHeight: CGFloat = 60
     private var borderColor: Color = .clear
+    
+    private var symbolHeaderFont: Font = Font.system(size: 14, weight: .bold)
+    private var symbolHeaderTextColor: Color = .black
+    private var symbolBackgroundColor: Color = .clear
+    
+    private var timeHeaderTextColor: Color = .black
+    private var itemBackgroundColor: Color = .clear
     
     private init() { }
     
+    public func setSymbolHeaderTextColor(color: Color) {
+        self.symbolHeaderTextColor = color
+    }
+    
+    public func setTimeHeaderTextColor(color: Color) {
+        self.timeHeaderTextColor = color
+    }
+    
     public func setBorderColor(color: Color) {
         self.borderColor = color
+    }
+    
+    public func setSymbolBackgroundColor(color: Color) {
+        self.symbolBackgroundColor = color
+    }
+    
+    public func setItemBackgroundColor(color: Color) {
+        self.itemBackgroundColor = color
     }
     
     public func setHeaderHeight(height: CGFloat) {
@@ -61,12 +84,28 @@ public class ElliotableConstant {
         self.maxTime = maxTime
     }
     
+    public func getSymbolHeaderTextColor() -> Color {
+        return self.symbolHeaderTextColor
+    }
+    
+    public func getTimeHeaderTextColor() -> Color {
+        return self.timeHeaderTextColor
+    }
+    
     public func getDayCount() -> Int {
         return self.dayCount
     }
     
     public func getBorderColor() -> Color {
         return self.borderColor
+    }
+    
+    public func getSymbolBackgroundColor() -> Color {
+        return self.symbolBackgroundColor
+    }
+    
+    public func getItemBackgroundColor() -> Color {
+        return self.itemBackgroundColor
     }
     
     public func getHeight(isHeader: Bool) -> CGFloat {

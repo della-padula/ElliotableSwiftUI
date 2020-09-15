@@ -51,6 +51,22 @@ public struct ElliotableView: View {
         ElliotableConstant.shared.setBorderColor(color: color)
     }
     
+    public func symbolBackgroundColor(color: Color) {
+        ElliotableConstant.shared.setSymbolBackgroundColor(color: color)
+    }
+    
+    public func itemBackgroundColor(color: Color) {
+        ElliotableConstant.shared.setItemBackgroundColor(color: color)
+    }
+    
+    public func symbolHeaderTextColor(color: Color) {
+        ElliotableConstant.shared.setSymbolHeaderTextColor(color: color)
+    }
+    
+    public func timeHeaderTextColor(color: Color) {
+        ElliotableConstant.shared.setTimeHeaderTextColor(color: color)
+    }
+    
     public func headerFont(font: Font) {
         
     }
@@ -95,11 +111,13 @@ public struct TimetableItemView: View {
             VStack(alignment: .leading) { }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
                 .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+                .background(ElliotableConstant.shared.getItemBackgroundColor())
         } else {
             VStack(alignment: .leading) { }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
                 .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
                 .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
+                .background(ElliotableConstant.shared.getItemBackgroundColor())
         }
     }
 }
@@ -116,6 +134,9 @@ public struct TimetableHeaderView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: true))
             .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
             .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
+            .background(ElliotableConstant.shared.getSymbolBackgroundColor())
+            .foregroundColor(ElliotableConstant.shared.getSymbolHeaderTextColor())
+            .font(.system(size: 14, weight: .bold))
     }
 }
 
@@ -142,6 +163,8 @@ public struct TimetableFirstColumnView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
             .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
             .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
+            .foregroundColor(ElliotableConstant.shared.getTimeHeaderTextColor())
+            .background(ElliotableConstant.shared.getSymbolBackgroundColor())
         } else {
             VStack(alignment: .leading) {
                 HStack {
@@ -156,6 +179,8 @@ public struct TimetableFirstColumnView: View {
             .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
             .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
             .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
+            .foregroundColor(ElliotableConstant.shared.getTimeHeaderTextColor())
+            .background(ElliotableConstant.shared.getSymbolBackgroundColor())
         }
     }
 }
