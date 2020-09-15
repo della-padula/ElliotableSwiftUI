@@ -21,35 +21,59 @@ public struct ElliotableView: View {
     
     public var body: some View {
         ScrollView {
-            LazyVGrid(columns: getColumnGrid(dayCount: 5), spacing: 0) {
-                ForEach((0..<60), id: \.self) { index in
-                    if index < 6 {
+            LazyVGrid(columns: getColumnGrid(dayCount: ElliotableConstant.shared.getDayCount()), spacing: 0) {
+                let columnCount = ElliotableConstant.shared.getDayCount() + 1
+                let totalCellCount = (ElliotableConstant.shared.getTimeList().count + 1) * (ElliotableConstant.shared.getDayCount() + 1)
+                ForEach((0..<totalCellCount), id: \.self) { index in
+                    if index < columnCount {
                         TimetableHeaderView(index: index)
                     } else {
-                        if (index % 6) == 0 {
-                            TimetableFirstColumnView(index: index / 6)
+                        if (index % columnCount) == 0 {
+                            if index / columnCount == totalCellCount / columnCount {
+                                TimetableFirstColumnView(index: index / columnCount, isLastRow: true)
+                            } else {
+                                TimetableFirstColumnView(index: index / columnCount)
+                            }
                         } else {
-                            TimetableItemView(index: index, title: "TLE\(index)", subTitle: "SUB\(index)")
+                            if index / columnCount == totalCellCount / columnCount {
+                                TimetableItemView(index: index, title: "TLE\(index)", subTitle: "SUB\(index)", isLastRow: true)
+                            } else {
+                                TimetableItemView(index: index, title: "TLE\(index)", subTitle: "SUB\(index)")
+                            }
                         }
                     }
                 }
-            }.lineSpacing(0).border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+            }.lineSpacing(0).border(ElliotableConstant.shared.getBorderColor(), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
         }
     }
     
-    public func daySymbols(symbols: [String]) -> some View {
+    public func borderColor(color: Color) {
+        ElliotableConstant.shared.setBorderColor(color: color)
+    }
+    
+    public func headerFont(font: Font) {
+        
+    }
+    
+    public func timeFont(font: Font) {
+        
+    }
+    
+    public func daySymbols(symbols: [String]) {
         ElliotableConstant.shared.setDaySymbol(symbols: symbols)
-        return self
     }
     
-    public func courseList(list: [ElliottEvent]) -> some View {
+    public func courseList(list: [ElliottEvent]) {
         ElliotableConstant.shared.setCourseList(list: list)
-        return self
     }
     
-    public func dayCount(count: Int) -> some View {
+    public func dayCount(count: Int) {
         ElliotableConstant.shared.setDayCount(count: count)
-        return self
+    }
+    
+    public func height(header: CGFloat, item: CGFloat) {
+        ElliotableConstant.shared.setHeaderHeight(height: header)
+        ElliotableConstant.shared.setItemHeight(height: item)
     }
 }
 
@@ -57,21 +81,26 @@ public struct TimetableItemView: View {
     private var title: String?
     private var subTitle: String?
     private var index: Int = -1
+    private var isLastRow: Bool = false
     
-    public init(index: Int, title: String, subTitle: String?) {
+    public init(index: Int, title: String, subTitle: String?, isLastRow: Bool = false) {
         self.index = index
         self.title = title
         self.subTitle = subTitle
+        self.isLastRow = isLastRow
     }
     
     public var body: some View {
-        VStack(alignment: .leading) {
-            Text(title ?? "").font(.system(size: 16))
-            Text(subTitle ?? "").font(.system(size: 12))
+        if isLastRow {
+            VStack(alignment: .leading) { }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
+                .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+        } else {
+            VStack(alignment: .leading) { }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
+                .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+                .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-        .border(width: 1, edge: .trailing, color: Color.black)
-        .border(width: 1, edge: .bottom, color: Color.black)
     }
 }
 
@@ -84,23 +113,49 @@ public struct TimetableHeaderView: View {
     
     public var body: some View {
         Text(index < 1 ? "" : ElliotableConstant.shared.getDaySymbol(index: index))
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 25)
-            .border(width: 1, edge: .trailing, color: Color.black)
-            .border(width: 1, edge: .bottom, color: Color.black)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: true))
+            .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+            .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
     }
 }
 
 public struct TimetableFirstColumnView: View {
     private var index: Int = 0
+    private var isLastRow: Bool = false
     
-    public init(index: Int) {
+    public init(index: Int, isLastRow: Bool = false) {
         self.index = index
+        self.isLastRow = isLastRow
     }
     
     public var body: some View {
-        Text(ElliotableConstant.shared.getTimeList()[self.index])
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-            .border(width: 1, edge: .trailing, color: Color.black)
-            .border(width: 1, edge: .bottom, color: Color.black)
+        if isLastRow {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Text(ElliotableConstant.shared.getTimeList()[self.index - 1])
+                        .font(.system(size: 10))
+                        .padding([.top, .trailing],4)
+                }
+                Spacer()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
+            .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
+        } else {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Text(ElliotableConstant.shared.getTimeList()[self.index - 1])
+                        .font(.system(size: 10))
+                        .padding([.top, .trailing],4)
+                }
+                Spacer()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: ElliotableConstant.shared.getHeight(isHeader: false))
+            .border(width: 1, edge: .trailing, color: ElliotableConstant.shared.getBorderColor())
+            .border(width: 1, edge: .bottom, color: ElliotableConstant.shared.getBorderColor())
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 0)
+        }
     }
 }

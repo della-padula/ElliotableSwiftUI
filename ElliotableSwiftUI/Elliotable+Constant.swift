@@ -6,9 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
+import UIKit
 
 public class ElliotableConstant {
     public static let shared: ElliotableConstant = ElliotableConstant()
+    
+    // MARK: View Main Section
+    private var daySymbols: [String] = ["월", "화", "수", "목", "금", "토", "일"]
+    private var isPadding: Bool = false
+    private var minTime: Int = 9
+    private var maxTime: Int = 20
+    private var dayCount: Int = 5
     
     private var courseList: [ElliottEvent] = [ElliottEvent]() {
         didSet {
@@ -17,13 +26,24 @@ public class ElliotableConstant {
         }
     }
     
-    private var daySymbols: [String] = ["월", "화", "수", "목", "금", "토", "일"]
-    private var isPadding: Bool = false
-    private var minTime: Int = 9
-    private var maxTime: Int = 20
-    private var dayCount: Int = 5
+    // MARK: View Layout Section
+    private var headerHeight: CGFloat = 25
+    private var itemHeight: CGFloat = 50
+    private var borderColor: Color = .clear
     
     private init() { }
+    
+    public func setBorderColor(color: Color) {
+        self.borderColor = color
+    }
+    
+    public func setHeaderHeight(height: CGFloat) {
+        self.headerHeight = height
+    }
+    
+    public func setItemHeight(height: CGFloat) {
+        self.itemHeight = height
+    }
     
     public func setDayCount(count: Int) {
         self.dayCount = count
@@ -39,6 +59,18 @@ public class ElliotableConstant {
     
     public func setMaxTime(maxTime: Int) {
         self.maxTime = maxTime
+    }
+    
+    public func getDayCount() -> Int {
+        return self.dayCount
+    }
+    
+    public func getBorderColor() -> Color {
+        return self.borderColor
+    }
+    
+    public func getHeight(isHeader: Bool) -> CGFloat {
+        return isHeader ? headerHeight : itemHeight
     }
     
     public func getTimeList() -> [String] {
