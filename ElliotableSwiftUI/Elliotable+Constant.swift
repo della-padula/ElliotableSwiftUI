@@ -13,7 +13,7 @@ public class ElliotableConstant {
     public static let shared: ElliotableConstant = ElliotableConstant()
     
     // MARK: View Main Section
-    private var daySymbols: [String] = ["월", "화", "수", "목", "금", "토", "일"]
+    private var daySymbols: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     private var isPadding: Bool = false
     private var minTime: Int = 9
     private var maxTime: Int = 20
@@ -84,12 +84,28 @@ public class ElliotableConstant {
         self.maxTime = maxTime
     }
     
+    public func getMinTime() -> Int {
+        return self.minTime
+    }
+    
+    public func getMaxTime() -> Int {
+        return self.maxTime
+    }
+    
     public func getSymbolHeaderTextColor() -> Color {
         return self.symbolHeaderTextColor
     }
     
     public func getTimeHeaderTextColor() -> Color {
         return self.timeHeaderTextColor
+    }
+    
+    public func getCourseCount() -> Int {
+        return courseList.count
+    }
+    
+    public func getCourseList() -> [ElliottEvent] {
+        return courseList
     }
     
     public func getDayCount() -> Int {
