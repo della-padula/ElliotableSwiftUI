@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		B05AEE50251067F500D21905 /* ElliotableSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = B05AEE4E251067F500D21905 /* ElliotableSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B05AEE57251073CF00D21905 /* ElliottEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE56251073CF00D21905 /* ElliottEvent.swift */; };
+		B05AEE59251073EA00D21905 /* ElliottDayOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE58251073EA00D21905 /* ElliottDayOption.swift */; };
+		B05AEE7625108BFC00D21905 /* SwiftUI+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B05AEE4B251067F500D21905 /* ElliotableSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ElliotableSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05AEE4E251067F500D21905 /* ElliotableSwiftUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElliotableSwiftUI.h; sourceTree = "<group>"; };
 		B05AEE4F251067F500D21905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B05AEE56251073CF00D21905 /* ElliottEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElliottEvent.swift; sourceTree = "<group>"; };
+		B05AEE58251073EA00D21905 /* ElliottDayOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElliottDayOption.swift; sourceTree = "<group>"; };
+		B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Border.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +54,9 @@
 			children = (
 				B05AEE4E251067F500D21905 /* ElliotableSwiftUI.h */,
 				B05AEE4F251067F500D21905 /* Info.plist */,
+				B05AEE56251073CF00D21905 /* ElliottEvent.swift */,
+				B05AEE58251073EA00D21905 /* ElliottDayOption.swift */,
+				B05AEE7525108BFC00D21905 /* SwiftUI+Border.swift */,
 			);
 			path = ElliotableSwiftUI;
 			sourceTree = "<group>";
@@ -94,6 +103,7 @@
 				TargetAttributes = {
 					B05AEE4A251067F500D21905 = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1200;
 					};
 				};
 			};
@@ -130,6 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B05AEE57251073CF00D21905 /* ElliottEvent.swift in Sources */,
+				B05AEE59251073EA00D21905 /* ElliottDayOption.swift in Sources */,
+				B05AEE7625108BFC00D21905 /* SwiftUI+Border.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +274,7 @@
 		B05AEE54251067F500D21905 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = M79H9K226Y;
@@ -279,6 +293,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -287,6 +302,7 @@
 		B05AEE55251067F500D21905 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = M79H9K226Y;
