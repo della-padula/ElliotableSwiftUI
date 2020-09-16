@@ -49,60 +49,8 @@ public struct ElliotableView: View {
                     }
                 }.lineSpacing(0).border(ElliotableConstant.shared.getBorderColor(), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 
-                HStack(spacing: 0) {
-                    let hourHeight = ElliotableConstant.shared.getHeight(isHeader: false)
-                    let columnCount = ElliotableConstant.shared.getDayCount()
-                    
-                    VStack {
-
-                    }
-                    .frame(minWidth: 25, maxWidth: 25, minHeight: 0, maxHeight: .infinity)
-                    
-                    ForEach((0..<columnCount), id: \.self) { index in
-                        VStack {
-                            let courseList = ElliotableConstant.shared.getCourseList()
-                            ZStack {
-                                VStack {
-                                    ForEach((0..<ElliotableConstant.shared.getCourseCount()), id: \.self) { courseIndex in
-                                        let course = courseList[courseIndex]
-                                        if index == course.courseDay.rawValue - 1 {
-                                            let courseStartHour = Int(course.startTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMinTime()
-                                            let courseStartMinute = Int(course.startTime.split(separator: ":")[1]) ?? 0
-                                            
-                                            let courseEndHour = Int(course.endTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMaxTime()
-                                            let courseEndMinute = Int(course.endTime.split(separator: ":")[1]) ?? 0
-                                            
-                                            let startHourDiff = CGFloat(courseStartHour - ElliotableConstant.shared.getMinTime())
-                                            let startMinuteDiff = (CGFloat(courseStartMinute) / CGFloat(60)) * hourHeight
-                                            
-                                            let courseHourDiff = CGFloat(courseEndHour - courseStartHour)
-                                            let endMinuteDiff = (CGFloat(courseEndMinute) / CGFloat(60)) * hourHeight
-                                            
-                                            VStack {
-                                                
-                                            }
-                                            .frame(minWidth: 0,
-                                                   maxWidth: .infinity,
-                                                   minHeight: 27,
-                                                   maxHeight: 27 + (hourHeight * startHourDiff) + startMinuteDiff)
-                                            
-                                            CourseView()
-                                                .frame(minWidth: 0,
-                                                       maxWidth: .infinity,
-                                                       minHeight: hourHeight,
-                                                       maxHeight: (hourHeight * courseHourDiff) + endMinuteDiff)
-                                                .background(colors[index])
-                                        }
-                                    }
-                                    Spacer()
-                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            }
-                            Spacer()
-                        }
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    }
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                CourseSectionView()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             }
         }
     }
@@ -245,8 +193,138 @@ struct TimetableFirstColumnView: View {
     }
 }
 
+struct CourseSectionView: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            let columnCount = ElliotableConstant.shared.getDayCount()
+            
+            VStack {
+                
+            }
+            .frame(minWidth: 25, maxWidth: 25, minHeight: 0, maxHeight: .infinity)
+            
+            ForEach((0..<columnCount), id: \.self) { index in
+                VStack {
+                    let courseList = ElliotableConstant.shared.getCourseList()
+                    ZStack {
+                        ForEach((0..<ElliotableConstant.shared.getCourseCount()), id: \.self) { courseIndex in
+                            CourseColumnView(course: courseList[courseIndex], index: index)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                        }
+                    }
+                    Spacer()
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            }
+        }
+    }
+}
+
+struct CourseColumnView: View {
+    private let hourHeight = ElliotableConstant.shared.getHeight(isHeader: false)
+    private let colors: [Color] = [.blue, .green, .gray, .red, .orange, .pink]
+    
+    private var course: ElliottEvent
+    private var index: Int
+    
+    init(course: ElliottEvent, index: Int) {
+        self.course = course
+        self.index = index
+    }
+    
+    var body: some View {
+        VStack {
+            if index == course.courseDay.rawValue - 1 {
+                let courseStartHour = Int(course.startTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMinTime()
+                let courseStartMinute = Int(course.startTime.split(separator: ":")[1]) ?? 0
+                
+                let courseEndHour = Int(course.endTime.split(separator: ":")[0]) ?? ElliotableConstant.shared.getMaxTime()
+                let courseEndMinute = Int(course.endTime.split(separator: ":")[1]) ?? 0
+                
+                let startHourDiff = CGFloat(courseStartHour - ElliotableConstant.shared.getMinTime())
+                let startMinuteDiff = (CGFloat(courseStartMinute) / CGFloat(60)) * hourHeight
+                
+                let courseHourDiff = CGFloat(courseEndHour - courseStartHour)
+                let endMinuteDiff = (CGFloat(courseEndMinute) / CGFloat(60)) * hourHeight
+                
+                VStack {
+                    
+                }
+                .frame(minWidth: 0,
+                       maxWidth: .infinity,
+                       minHeight: 27,
+                       maxHeight: 27 + (hourHeight * startHourDiff) + startMinuteDiff)
+                
+                CourseView()
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: hourHeight,
+                           maxHeight: (hourHeight * courseHourDiff) + endMinuteDiff)
+                    .background(RoundedCorners(color: colors[index], tl: 30, tr: 0, bl: 0, br: 30))
+            }
+            Spacer()
+        }
+    }
+}
+
 struct CourseView: View {
     var body: some View {
-        Text("Hello World")
+        VStack {
+            HStack {
+                Spacer()
+                Text("빅데이터\n시스템")
+                    .multilineTextAlignment(.trailing)
+                    .lineLimit(2)
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding([.top, .trailing], 2)
+            }
+            
+            HStack {
+                Spacer()
+                Text("정보과학관21201")
+                    .multilineTextAlignment(.trailing)
+                    .lineLimit(2)
+                    .font(.system(size: 8))
+                    .foregroundColor(.white)
+                    .padding([.trailing], 2)
+            }
+            Spacer()
+        }
+    }
+}
+
+struct RoundedCorners: View {
+    var color: Color = .blue
+    var tl: CGFloat = 0.0
+    var tr: CGFloat = 0.0
+    var bl: CGFloat = 0.0
+    var br: CGFloat = 0.0
+
+    var body: some View {
+        GeometryReader { geometry in
+            Path { path in
+
+                let w = geometry.size.width
+                let h = geometry.size.height
+
+                // Make sure we do not exceed the size of the rectangle
+                let tr = min(min(self.tr, h/2), w/2)
+                let tl = min(min(self.tl, h/2), w/2)
+                let bl = min(min(self.bl, h/2), w/2)
+                let br = min(min(self.br, h/2), w/2)
+
+                path.move(to: CGPoint(x: w / 2.0, y: 0))
+                path.addLine(to: CGPoint(x: w - tr, y: 0))
+                path.addArc(center: CGPoint(x: w - tr, y: tr), radius: tr, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
+                path.addLine(to: CGPoint(x: w, y: h - br))
+                path.addArc(center: CGPoint(x: w - br, y: h - br), radius: br, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 90), clockwise: false)
+                path.addLine(to: CGPoint(x: bl, y: h))
+                path.addArc(center: CGPoint(x: bl, y: h - bl), radius: bl, startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 180), clockwise: false)
+                path.addLine(to: CGPoint(x: 0, y: tl))
+                path.addArc(center: CGPoint(x: tl, y: tl), radius: tl, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
+            }
+            .fill(self.color)
+        }
     }
 }
