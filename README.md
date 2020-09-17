@@ -2,6 +2,31 @@
 ElliotableSwiftUI is simple library to generate **Timetable** of University.   
 If you only add a course, **the course time is automatically calculated** and added to the timetable.  
 
+## Installation  
+### Cocoapods (Under Construction)
+Elliotable is available through CocoaPods, to install it simply add the following line to your Podfile:   
+```ruby
+pod 'ElliotableSwiftUI'
+```
+
+## Usage     
+
+### Course Item Structure   
+```swift
+courseId : The identifier of the course   
+courseName : The name of the course
+roomName : The name of the lecture room
+professor : Professor Name
+courseDay : Weekday of the course
+startTime : Start time of course (String type - format : "HH:mm")
+endTime : End time of course (String type - format : "HH:mm")
+backgroundColor : backgroud color of each course item
+(Optional) textColor: Course Item Text Color
+```
+
+### Generate Swift UI View  
+You can generate timetable view by adding properties about styles of timetable.  
+A source code below indicates some examples generate time table view.  
 
 ```swift
 struct ContentView: View {
