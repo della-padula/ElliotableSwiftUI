@@ -2,6 +2,12 @@
 ElliotableSwiftUI is simple library to generate **Timetable** of University.   
 If you only add a course, **the course time is automatically calculated** and added to the timetable.  
 
+## Author Information  
+Timetable Library for iOS Development   
+Author : Denny.K (Taein Kim) / Seoul, South Korea   
+Email : della.kimko@gmail.com   
+Blog : https://terry-some.tistory.com/  
+
 ## Installation  
 ### Cocoapods (Under Construction)
 Elliotable is available through CocoaPods, to install it simply add the following line to your Podfile:   
