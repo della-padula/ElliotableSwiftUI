@@ -255,12 +255,18 @@ struct CourseColumnView: View {
                        minHeight: 27,
                        maxHeight: 27 + (hourHeight * startHourDiff) + startMinuteDiff)
                 
-                CourseView()
+                CourseView(course: course)
                     .frame(minWidth: 0,
                            maxWidth: .infinity,
                            minHeight: hourHeight,
                            maxHeight: (hourHeight * courseHourDiff) + endMinuteDiff)
                     .background(RoundedCorners(color: colors[index], tl: 30, tr: 0, bl: 0, br: 30))
+                    .gesture(
+                        TapGesture()
+                            .onEnded { _ in
+                                print("Tapped : \(course.courseName)")
+                            }
+                    )
             }
             Spacer()
         }
@@ -268,11 +274,17 @@ struct CourseColumnView: View {
 }
 
 struct CourseView: View {
+    private var course: ElliottEvent
+    
+    init(course: ElliottEvent) {
+        self.course = course
+    }
+    
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Text("빅데이터\n시스템")
+                Text(course.courseName)
                     .multilineTextAlignment(.trailing)
                     .lineLimit(2)
                     .font(.system(size: 12, weight: .bold))
@@ -282,7 +294,7 @@ struct CourseView: View {
             
             HStack {
                 Spacer()
-                Text("정보과학관21201")
+                Text(course.roomName)
                     .multilineTextAlignment(.trailing)
                     .lineLimit(2)
                     .font(.system(size: 8))
@@ -300,20 +312,20 @@ struct RoundedCorners: View {
     var tr: CGFloat = 0.0
     var bl: CGFloat = 0.0
     var br: CGFloat = 0.0
-
+    
     var body: some View {
         GeometryReader { geometry in
             Path { path in
-
+                
                 let w = geometry.size.width
                 let h = geometry.size.height
-
+                
                 // Make sure we do not exceed the size of the rectangle
                 let tr = min(min(self.tr, h/2), w/2)
                 let tl = min(min(self.tl, h/2), w/2)
                 let bl = min(min(self.bl, h/2), w/2)
                 let br = min(min(self.br, h/2), w/2)
-
+                
                 path.move(to: CGPoint(x: w / 2.0, y: 0))
                 path.addLine(to: CGPoint(x: w - tr, y: 0))
                 path.addArc(center: CGPoint(x: w - tr, y: tr), radius: tr, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
