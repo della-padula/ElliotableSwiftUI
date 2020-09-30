@@ -62,6 +62,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.platform     = :ios
+  spec.ios.deployment_target = '14.0'
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -88,9 +89,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
-
+  spec.source_files  = "ElliotableSwiftUI"
+  spec.swift_version = "5.2"
   # spec.public_header_files = "Classes/**/*.h"
 
 
