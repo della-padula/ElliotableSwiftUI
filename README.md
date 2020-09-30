@@ -8,6 +8,12 @@ Author : Denny.K (Taein Kim) / Seoul, South Korea
 Email : della.kimko@gmail.com   
 Blog : https://terry-some.tistory.com/  
 
+[![Version](https://img.shields.io/badge/version-v0.0.1-green.svg?style=flat)](https://cocoapods.org/pods/ElliotableSwiftUI)
+[![Version](https://img.shields.io/badge/ios-14.0-blue.svg?style=flat)](https://cocoapods.org/pods/ElliotableSwiftUI)
+[![Version](https://img.shields.io/cocoapods/v/ElliotableSwiftUI.svg?style=flat)](https://cocoapods.org/pods/ElliotableSwiftUI)
+[![License](https://img.shields.io/cocoapods/l/ElliotableSwiftUI.svg?style=flat)](https://cocoapods.org/pods/ElliotableSwiftUI)
+[![Platform](https://img.shields.io/cocoapods/p/ElliotableSwiftUI.svg?style=flat)](https://cocoapods.org/pods/ElliotableSwiftUI)
+
 ## Installation  
 ### Cocoapods (Under Construction)
 Elliotable is available through CocoaPods, to install it simply add the following line to your Podfile:   
