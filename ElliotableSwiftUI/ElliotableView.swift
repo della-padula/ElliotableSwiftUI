@@ -55,6 +55,10 @@ public struct ElliotableView: View {
         }
     }
     
+    public func setDelegate(delegate: ElliotableDelegate) {
+        ElliotableConstant.shared.delegate = delegate
+    }
+    
     public func borderColor(color: Color) {
         ElliotableConstant.shared.setBorderColor(color: color)
     }
@@ -265,6 +269,7 @@ struct CourseColumnView: View {
                         TapGesture()
                             .onEnded { _ in
                                 print("Tapped : \(course.courseName)")
+                                ElliotableConstant.shared.delegate?.elliotable(onClicked: course)
                             }
                     )
             }

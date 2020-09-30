@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import Combine
 import SwiftUI
 import UIKit
 
+public protocol ElliotableDelegate: class {
+    func elliotable(onClicked: ElliottEvent)
+}
+
 public class ElliotableConstant {
     public static let shared: ElliotableConstant = ElliotableConstant()
+    public weak var delegate: ElliotableDelegate?
     
     // MARK: View Main Section
     private var daySymbols: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
